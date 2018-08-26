@@ -139,11 +139,26 @@ class Cheess:
         return posibles_moves
 
     def move_approve(self, actual_X, actual_Y, next_X, next_Y):
-        for moves in self.restrictions(self.table[actual_X][actual_Y], actual_X, actual_Y):
-            print self.positionABC[moves[0]] , next_Y , (next_X , int(moves[1]) - 2 , next_X , int(moves[1])-1)
+        # for moves in self.restrictions(self.table[actual_X][actual_Y], actual_X, actual_Y):
+        #     print "Done"
+        #     print self.positionABC[moves[0]] , next_Y , (next_X , int(moves[1]) - 2 , next_X , int(moves[1])-1)
 
-            if self.positionABC[moves[0]] == next_Y and (next_X == int(moves[1]) - 2 or next_X == int(moves[1])-1):
-                return True
+        #     if self.positionABC[moves[0]] == next_Y and (next_X == int(moves[1]) - 2 or next_X == int(moves[1])-1):
+        #         return True
+        # return False
+        piece = self.table[actual_X][actual_Y].lower()
+        if piece == "p":
+            if self.table[next_X][next_Y].lower() == "#" or self.table[next_X][next_Y].lower() == "@":
+                if actual_Y == 7 or actual_Y == 1: move_n = 2
+                else: move_n = 1
+                if next_X == actual_X - move_n or next_X == actual_X  - 1:
+                    return True
+        elif piece == "r":
+            if self.table[next_X][next_Y].lower() == "#" or self.table[next_X][next_Y].lower() == "@":
+                if next_X == actual_X and next_Y == actual_Y:
+                    return False
+                else:
+                    pass
         return False
 
 game = Cheess()
